@@ -25,9 +25,7 @@
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
-  html, body {
-    height: 100%;
-  }
+  html, body { height: 100%; }
 
   html { scroll-behavior: smooth; }
 
@@ -41,19 +39,15 @@
     overflow-x: hidden;
     line-height: 1.75;
     -webkit-font-smoothing: antialiased;
-    /* Flex column shell: header, scrollable content, bottom nav.
-       Avoids position:fixed, which is unreliable inside the
-       Google Apps Script iframe wrapper on mobile browsers. */
     display: flex;
     flex-direction: column;
     height: 100vh;
     height: 100dvh;
   }
 
-  /* STATUS BAR SPACER */
   .status-spacer { height: var(--safe-top); background: var(--bg-deep); flex-shrink: 0; }
 
-  /* APP HEADER (in-flow, not fixed) */
+  /* APP HEADER */
   .app-header {
     flex-shrink: 0;
     padding-top: 0;
@@ -104,7 +98,7 @@
     letter-spacing: 0.3px;
   }
 
-  /* SCROLLABLE CONTENT AREA — takes remaining space between header and nav */
+  /* VIEWPORT & VIEWS */
   .view-viewport {
     flex: 1 1 auto;
     min-height: 0;
@@ -129,24 +123,24 @@
   .section { padding: 22px 0 26px; }
   .section + .section { border-top: 1px solid rgba(255,255,255,0.06); }
 
-  /* HERO SECTION */
+  /* HERO SECTION WITH IMAGE */
   .hero-card {
     position: relative;
     background: linear-gradient(155deg, rgba(212,175,55,0.16) 0%, rgba(10,20,32,0.9) 45%, rgba(6,11,20,0.95) 100%);
     border: 1px solid var(--gold-border);
     border-radius: 22px;
-    padding: 30px 22px 26px;
+    padding: 20px 18px 24px;
     text-align: center;
     box-shadow: 0 20px 50px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.06);
     overflow: hidden;
   }
-  .hero-card::before {
-    content: "";
-    position: absolute;
-    top: -60%; right: -30%;
-    width: 240px; height: 240px;
-    background: radial-gradient(circle, rgba(212,175,55,0.25), transparent 70%);
-    pointer-events: none;
+  .hero-img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 14px;
+    margin-bottom: 16px;
+    border: 1px solid var(--gold-border);
   }
   .hero-eyebrow {
     font-size: 11.5px;
@@ -154,45 +148,40 @@
     letter-spacing: 2px;
     text-transform: uppercase;
     color: var(--gold);
-    margin-bottom: 10px;
-    position: relative;
+    margin-bottom: 8px;
   }
   .hero-title {
     font-family: 'Playfair Display', serif;
-    font-size: 30px;
+    font-size: 28px;
     font-weight: 800;
     color: #fff;
     line-height: 1.28;
     margin-bottom: 6px;
-    position: relative;
   }
   .hero-title em { color: var(--gold-light); font-style: normal; }
   .hero-subtitle {
-    font-size: 14.5px;
+    font-size: 14px;
     color: var(--text-muted);
-    margin-bottom: 20px;
+    margin-bottom: 18px;
     font-weight: 500;
-    position: relative;
   }
   .hero-quote {
-    font-size: 13.5px;
+    font-size: 13px;
     color: var(--text-muted);
     font-style: italic;
-    line-height: 1.75;
-    background: rgba(0,0,0,0.3);
-    padding: 16px 16px 14px;
+    line-height: 1.7;
+    background: rgba(0,0,0,0.35);
+    padding: 14px 14px 12px;
     border-radius: 14px;
     border-left: 3px solid var(--gold);
     text-align: left;
-    position: relative;
   }
   .hero-quote strong {
     color: var(--gold-light);
     display: block;
-    margin-top: 8px;
+    margin-top: 6px;
     font-style: normal;
-    font-size: 12.5px;
-    letter-spacing: 0.3px;
+    font-size: 12px;
   }
 
   /* STATS GRID */
@@ -200,18 +189,15 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
-    margin-top: 18px;
-    position: relative;
+    margin-top: 16px;
   }
   .stat-card {
     background: var(--bg-surface);
     border: 1px solid var(--gold-border);
     border-radius: 14px;
-    padding: 15px 8px;
+    padding: 14px 8px;
     text-align: center;
-    transition: transform 0.15s ease, background 0.15s ease;
   }
-  .stat-card:active { transform: scale(0.96); background: var(--bg-surface-hi); }
   .stat-num {
     font-size: 22px;
     font-weight: 800;
@@ -220,44 +206,50 @@
     font-family: 'Playfair Display', serif;
   }
   .stat-desc {
-    font-size: 11.5px;
+    font-size: 11px;
     color: var(--text-muted);
-    margin-top: 3px;
-    font-weight: 500;
+    margin-top: 2px;
   }
 
   /* SECTION HEADINGS */
   .sec-tag {
     color: var(--gold);
-    font-size: 11.5px;
+    font-size: 11px;
     font-weight: 700;
     letter-spacing: 1.8px;
     text-transform: uppercase;
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 4px;
   }
   .sec-title {
     font-family: 'Playfair Display', serif;
-    font-size: 23px;
+    font-size: 22px;
     font-weight: 700;
     color: #fff;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
   }
 
-  /* CARDS STACK */
-  .cards-stack { display: flex; flex-direction: column; gap: 12px; }
+  /* CARDS WITH IMAGES */
+  .cards-stack { display: flex; flex-direction: column; gap: 14px; }
   .card {
     background: var(--bg-surface);
     border: 1px solid rgba(255,255,255,0.09);
-    border-radius: 16px;
-    padding: 17px 16px;
-    transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+    border-radius: 18px;
+    padding: 16px;
+    overflow: hidden;
   }
-  .card:active { transform: scale(0.985); background: var(--bg-surface-hi); border-color: var(--gold-border); }
-  .card-header { display: flex; align-items: center; gap: 11px; margin-bottom: 9px; }
+  .card-banner-img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .card-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
   .card-icon {
-    font-size: 20px;
-    width: 38px; height: 38px;
+    font-size: 18px;
+    width: 36px; height: 36px;
     background: var(--gold-dim);
     border: 1px solid var(--gold-border);
     border-radius: 10px;
@@ -265,7 +257,7 @@
     flex-shrink: 0;
   }
   .card-title { font-size: 16px; color: var(--gold-light); font-weight: 700; }
-  .card-text { font-size: 14px; color: var(--text-muted); line-height: 1.75; }
+  .card-text { font-size: 13.5px; color: var(--text-muted); line-height: 1.7; }
 
   /* ADMIN TREE */
   .admin-box {
@@ -293,49 +285,44 @@
     padding: 14px;
     margin-bottom: 10px;
     position: relative;
-    padding-left: 30px;
+    padding-left: 28px;
   }
   .admin-branch::before {
     content: "";
     position: absolute;
-    left: 14px; top: 18px;
+    left: 12px; top: 18px;
     width: 6px; height: 6px;
     border-radius: 50%;
     background: var(--gold);
   }
-  .admin-branch:last-of-type { margin-bottom: 0; }
-  .branch-title { color: var(--gold); font-weight: 700; font-size: 14.5px; margin-bottom: 5px; }
-  .chip-group { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 10px; }
+  .branch-title { color: var(--gold); font-weight: 700; font-size: 14px; margin-bottom: 4px; }
+  .chip-group { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
   .chip {
     background: rgba(212,175,55,0.16);
     border: 1px solid var(--gold-border);
     color: #fff;
-    padding: 5px 12px;
+    padding: 4px 10px;
     border-radius: 20px;
-    font-size: 12px;
-    font-weight: 500;
+    font-size: 11.5px;
   }
-  .admin-note { font-size: 12.5px; font-weight: 700; color: var(--gold); display: block; margin-bottom: 2px; }
 
-  /* HIGHLIGHT CARD */
+  /* HIGHLIGHT CARD WITH IMAGE */
   .highlight-card {
     background: linear-gradient(140deg, rgba(212,175,55,0.16), rgba(10,20,32,0.95));
     border: 1px solid var(--gold-border);
     border-radius: 18px;
-    padding: 20px 18px;
-    box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+    padding: 18px;
   }
 
   /* FOOTER */
   .app-footer {
     text-align: center;
-    padding: 26px 0 14px;
+    padding: 24px 0 12px;
     color: var(--text-dim);
-    font-size: 11.5px;
-    letter-spacing: 0.3px;
+    font-size: 11px;
   }
 
-  /* BOTTOM NAVIGATION BAR (in-flow, not fixed) */
+  /* BOTTOM NAVIGATION BAR */
   .bottom-nav {
     flex-shrink: 0;
     height: 66px;
@@ -359,40 +346,16 @@
     background: none;
     border: none;
     font-family: inherit;
-    text-decoration: none;
     font-size: 10.5px;
     font-weight: 600;
-    letter-spacing: 0.2px;
     width: 20%;
     position: relative;
     transition: color 0.2s ease;
     cursor: pointer;
-    -webkit-user-select: none;
-    user-select: none;
   }
-  .nav-item .icon {
-    font-size: 21px;
-    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
+  .nav-item .icon { font-size: 20px; transition: transform 0.2s ease; }
   .nav-item.active { color: var(--gold); }
   .nav-item.active .icon { transform: translateY(-2px) scale(1.08); }
-  .nav-item.active::before {
-    content: "";
-    position: absolute;
-    top: 2px;
-    width: 4px; height: 4px;
-    border-radius: 50%;
-    background: var(--gold);
-  }
-  .nav-item:active .icon { transform: scale(0.88); }
-
-  /* Reduced motion */
-  @media (prefers-reduced-motion: reduce) {
-    .view, .nav-item .icon, .card, .stat-card { animation: none !important; transition: none !important; }
-  }
-
-  /* Focus visibility for a11y */
-  .nav-item:focus-visible, .card:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
 </style>
 </head>
 <body>
@@ -416,20 +379,23 @@
 
       <section class="section" id="sec-home">
         <div class="hero-card">
+          <!-- Hero Header Image -->
+          <img class="hero-img" src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80" alt="Zakho Landscape" loading="lazy">
+          
           <div class="hero-eyebrow">Kurdistan Region · Iraq</div>
           <h1 class="hero-title">Zakho: The<br><em>Northern Gateway</em></h1>
           <p class="hero-subtitle">Progress, Heritage &amp; Development</p>
 
           <div class="hero-quote">
-            "Zakho is a very important part of Kurdistan Region, and a strategic area. We hope service projects will be implemented in the shortest time possible to provide employment opportunities."
-            <strong>— Masrour Barzani (Prime Minister)</strong>
+            "Zakho is a very important part of Kurdistan Region, and a strategic area. We hope service projects will be implemented in the shortest time possible to provide employment opportunities."[cite: 1]
+            <strong>— Masrour Barzani (Prime Minister)[cite: 1]</strong>
           </div>
 
           <div class="stats-grid">
-            <div class="stat-card"><span class="stat-num">377.5K</span><span class="stat-desc">Population</span></div>
-            <div class="stat-card"><span class="stat-num">2,083</span><span class="stat-desc">Area (km²)</span></div>
-            <div class="stat-card"><span class="stat-num">256</span><span class="stat-desc">Villages</span></div>
-            <div class="stat-card"><span class="stat-num">$932M</span><span class="stat-desc">Investments</span></div>
+            <div class="stat-card"><span class="stat-num">377.5K</span><span class="stat-desc">Population[cite: 1]</span></div>
+            <div class="stat-card"><span class="stat-num">2,083</span><span class="stat-desc">Area (km²)[cite: 1]</span></div>
+            <div class="stat-card"><span class="stat-num">256</span><span class="stat-desc">Villages[cite: 1]</span></div>
+            <div class="stat-card"><span class="stat-num">$932M</span><span class="stat-desc">Investments[cite: 1]</span></div>
           </div>
         </div>
       </section>
@@ -438,12 +404,15 @@
         <span class="sec-tag">Medical Breakthrough</span>
         <h2 class="sec-title">Health &amp; Innovation</h2>
         <div class="highlight-card">
+          <!-- Medical Innovation Image -->
+          <img class="card-banner-img" src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80" alt="Medical Technology" loading="lazy">
+          
           <div class="card-header">
             <span class="card-icon">❤️</span>
             <div class="card-title">Artificial Heart Invention</div>
           </div>
           <p class="card-text">
-            Zakho-born physician <strong style="color:#fff;">Dr. Azad Najjar</strong> invented a mechanical artificial heart, holding patents in Sweden, Europe, and Asia, earning a Nobel Prize candidacy.
+            Zakho-born physician <strong style="color:#fff;">Dr. Azad Najjar</strong> invented a mechanical artificial heart, holding patents in Sweden, Europe, and Asia, earning a Nobel Prize candidacy[cite: 1].
           </p>
         </div>
       </section>
@@ -461,16 +430,19 @@
 
         <div class="cards-stack">
           <div class="card">
+            <img class="card-banner-img" src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=800&q=80" alt="Map and Border" loading="lazy">
             <div class="card-header"><span class="card-icon">🗺️</span><div class="card-title">Border Location</div></div>
-            <p class="card-text">Located in northwest Iraq in the Sindi plain (lat 37.14, long 42.7). Positioned 10 km from Turkey's border and 30 km from Syria's border.</p>
+            <p class="card-text">Located in northwest Iraq in the Sindi plain (lat 37.14, long 42.7)[cite: 1]. Positioned 10 km from Turkey's border and 30 km from Syria's border[cite: 1].</p>
           </div>
           <div class="card">
+            <img class="card-banner-img" src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80" alt="Mountains" loading="lazy">
             <div class="card-header"><span class="card-icon">🏔️</span><div class="card-title">Topography</div></div>
-            <p class="card-text">Features rugged mountain trails, deep valleys, and rich agricultural plains including Sindi and Slevani plains.</p>
+            <p class="card-text">Features rugged mountain trails, deep valleys, and rich agricultural plains including Sindi and Slevani plains[cite: 1].</p>
           </div>
           <div class="card">
+            <img class="card-banner-img" src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80" alt="River" loading="lazy">
             <div class="card-header"><span class="card-icon">🌊</span><div class="card-title">Khabur River</div></div>
-            <p class="card-text">Flows through the city center, meeting the Hezel River 6 km downstream to form the Iraq-Turkey border. Rich in oil and water springs.</p>
+            <p class="card-text">Flows through the city center, meeting the Hezel River 6 km downstream to form the Iraq-Turkey border[cite: 1]. Rich in oil and water springs[cite: 1].</p>
           </div>
         </div>
       </section>
@@ -486,25 +458,25 @@
         <h2 class="sec-title">Independence &amp; Structure</h2>
 
         <div class="admin-box">
-          <div class="admin-root">Zakho Independent Administration</div>
+          <div class="admin-root">Zakho Independent Administration[cite: 1]</div>
 
           <div class="admin-branch">
             <div class="branch-title">1. Zakho District (Center)</div>
-            <p class="card-text">Main government facilities and administrative centers.</p>
+            <p class="card-text">Main government facilities and administrative centers[cite: 1].</p>
           </div>
 
           <div class="admin-branch">
             <div class="branch-title">2. Batifa District</div>
-            <p class="card-text">Supplementary district overseeing rural villages and facilities.</p>
+            <p class="card-text">Supplementary district overseeing rural villages and facilities[cite: 1].</p>
           </div>
 
           <div style="margin-top:14px;">
-            <span class="admin-note">Sub-districts (4 Units)</span>
+            <span class="admin-note">Sub-districts (4 Units)[cite: 1]</span>
             <div class="chip-group">
-              <span class="chip">Batel</span>
-              <span class="chip">Rizgari</span>
-              <span class="chip">Darkar</span>
-              <span class="chip">Begova</span>
+              <span class="chip">Batel[cite: 1]</span>
+              <span class="chip">Rizgari[cite: 1]</span>
+              <span class="chip">Darkar[cite: 1]</span>
+              <span class="chip">Begova[cite: 1]</span>
             </div>
           </div>
         </div>
@@ -522,20 +494,19 @@
 
         <div class="cards-stack">
           <div class="card">
+            <img class="card-banner-img" src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80" alt="Trade Crossing" loading="lazy">
             <div class="card-header"><span class="card-icon">🛃</span><div class="card-title">Ibrahim Khalil Crossing</div></div>
-            <p class="card-text">Vital trade gateway to Turkey and Europe. Trade exports reached over $12.6 Billion in 2023.</p>
+            <p class="card-text">Vital trade gateway to Turkey and Europe. Trade exports reached over $12.6 Billion in 2023[cite: 1].</p>
           </div>
           <div class="card">
+            <img class="card-banner-img" src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=800&q=80" alt="Airport" loading="lazy">
             <div class="card-header"><span class="card-icon">✈️</span><div class="card-title">International Airport</div></div>
-            <p class="card-text">Under construction near Zakho-Duhok border with an allocated budget of $12,832,000.</p>
+            <p class="card-text">Under construction near Zakho-Duhok border with an allocated budget of $12,832,000[cite: 1].</p>
           </div>
           <div class="card">
+            <img class="card-banner-img" src="https://images.unsplash.com/photo-1541888946425-d0fbb186a5b3?auto=format&fit=crop&w=800&q=80" alt="Road Construction" loading="lazy">
             <div class="card-header"><span class="card-icon">🛣️</span><div class="card-title">Roads &amp; Dams</div></div>
-            <p class="card-text">Paved 108 km of roads and constructed 5 submersible dams along Khabur River (225B IQD budget).</p>
-          </div>
-          <div class="card">
-            <div class="card-header"><span class="card-icon">♻️</span><div class="card-title">Recycling Plant</div></div>
-            <p class="card-text">A $23M private recycling facility recycling 80% of local waste and creating 150 jobs.</p>
+            <p class="card-text">Paved 108 km of roads and constructed 5 submersible dams along Khabur River (225B IQD budget)[cite: 1].</p>
           </div>
         </div>
       </section>
@@ -552,16 +523,20 @@
 
         <div class="cards-stack">
           <div class="card">
+            <!-- Dalal Bridge Style Image -->
+            <img class="card-banner-img" src="https://images.unsplash.com/photo-1545558014-8692077e9b5c?auto=format&fit=crop&w=800&q=80" alt="Dalal Bridge" loading="lazy">
             <div class="card-header"><span class="card-icon">🌉</span><div class="card-title">Dalal Bridge</div></div>
-            <p class="card-text">Ancient stone bridge spanning 114 meters long and 4.7 meters wide over the Khabur River.</p>
+            <p class="card-text">Ancient stone bridge spanning 114 meters long and 4.7 meters wide over the Khabur River[cite: 1].</p>
           </div>
           <div class="card">
+            <img class="card-banner-img" src="https://images.unsplash.com/photo-1572949645841-094f3a9c4c94?auto=format&fit=crop&w=800&q=80" alt="Zakho Castle" loading="lazy">
             <div class="card-header"><span class="card-icon">🏯</span><div class="card-title">Zakho Castle &amp; Bazaar</div></div>
-            <p class="card-text">Historic 13th-century castle converted into a heritage spot. Restored 140-year-old Ottoman Bazaar hosting 140 shops.</p>
+            <p class="card-text">Historic 13th-century castle converted into a heritage spot[cite: 1]. Restored 140-year-old Ottoman Bazaar hosting 140 shops[cite: 1].</p>
           </div>
           <div class="card">
+            <img class="card-banner-img" src="https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=800&q=80" alt="Waterfall" loading="lazy">
             <div class="card-header"><span class="card-icon">🌊</span><div class="card-title">Sharansh Waterfall &amp; Cave</div></div>
-            <p class="card-text">22-meter waterfall 18 km northeast. Nearby Bahiri Cave receives up to 2,000 visitors daily.</p>
+            <p class="card-text">22-meter waterfall 18 km northeast[cite: 1]. Nearby Bahiri Cave receives up to 2,000 visitors daily[cite: 1].</p>
           </div>
         </div>
       </section>
@@ -613,7 +588,6 @@
     });
   });
 
-  // Header shadow/border on scroll (content area scrolls, not the page)
   viewport.addEventListener('scroll', () => {
     if (viewport.scrollTop > 4) header.classList.add('scrolled');
     else header.classList.remove('scrolled');
